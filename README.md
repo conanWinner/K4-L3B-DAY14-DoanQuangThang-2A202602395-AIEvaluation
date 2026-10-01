@@ -24,8 +24,8 @@ Tài liệu chính thức của bài lab:
 | Vai trò | Tên chuẩn |
 |---|---|
 | Assignment / starter repo (repo này) | `K4-L3B-AI-Evaluation` |
-| Student submission repo | `K4-L3B-<HoVaTen>-<MSSV>-AIEvaluation` |
-| Ví dụ | `K4-L3B-NguyenVanAn-L3A202600280-AIEvaluation` |
+| Student submission repo | `K4-L3B-DAY14-<HoVaTen>-<MSSV>-AIEvaluation` |
+| Ví dụ | `K4-L3B-DAY14-NguyenVanAn-L3A202600280-AIEvaluation` |
 
 > ⚠️ **Đặt sai tên repo = trừ 5 điểm** theo quy định trong [RUBRIC.md](RUBRIC.md).
 
@@ -47,6 +47,28 @@ cp .env.example .env                                     # điền OPENAI_API_KE
 ```
 
 Chi tiết hướng dẫn theo hệ điều hành và xử lý lỗi: xem [`guide_lab.md`](guide_lab.md).
+
+### Chạy CP4 với Gemini qua 9router
+
+Cấu hình trong `.env` (khóa 9router riêng, không commit):
+
+```dotenv
+OPENAI_API_KEY=your_9router_api_key_here
+OPENAI_BASE_URL=http://127.0.0.1:20128/v1
+OPENAI_API_STYLE=chat
+OPENAI_MODEL=ag/gemini-3-flash
+OPENAI_MAX_OUTPUT_TOKENS=2048
+```
+
+9router phải đang chạy và model phải gọi được trên tài khoản đã kết nối.
+Giới hạn token bao gồm phần suy luận của model; prompt vẫn yêu cầu câu trả lời ngắn.
+Khi không cấu hình router, chế độ mặc định vẫn là OpenAI Responses.
+
+```bash
+.venv/bin/python validate_golden_dataset.py
+.venv/bin/python domain_assistant.py
+.venv/bin/python evaluate_answers.py
+```
 
 ---
 

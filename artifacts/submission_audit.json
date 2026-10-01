@@ -1,0 +1,15 @@
+{
+  "tests": "42 passed, 0 skipped",
+  "dataset": "PASS; 20 QA; 5/7/5/3; 10/10 source docs",
+  "artifact_recalculation": "20/20 answers and five metrics match saved benchmark",
+  "solution_sync": "AST identical excluding module docstring",
+  "secrets": "configured keys absent from submission files; .env ignored",
+  "bonus_3_4": "comparison design; no framework scores claimed",
+  "bonus_3_5": "20 real retrieved sets reranked by question; recall invariant",
+  "files_sha256": {
+    "golden_dataset.json": "7d483482668e71684de5cadd0dcae0693891025dec33cdbc957404f2d542ce71",
+    "artifacts/actual_answers.json": "8eb26d7b87253d6530f2fdf1c72102f1075ea2145ea1a457f301d8548a9cd81c",
+    "artifacts/benchmark_results.json": "1a1a2e1bf0e19610044796478a8049d2b048ad1d9f6f4daa8d4ce2a735b6ee6a",
+    "artifacts/reranking_results.json": "7b4739de8040850521f9fae0614f5fe73c976dc8c648b3a0cd49d2fd418ab1ef"
+  }
+}

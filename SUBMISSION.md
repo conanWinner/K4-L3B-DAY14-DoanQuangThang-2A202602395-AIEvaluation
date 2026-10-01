@@ -10,7 +10,7 @@
 Cấu trúc tên repository nộp bài:
 
 ```text
-K4-L3B-<HoVaTen>-<MSSV>-AIEvaluation
+K4-L3B-DAY14-<HoVaTen>-<MSSV>-AIEvaluation
 ```
 
 - `<HoVaTen>`: Họ và tên viết liền không dấu (PascalCase).
@@ -18,7 +18,7 @@ K4-L3B-<HoVaTen>-<MSSV>-AIEvaluation
 
 **Ví dụ:**
 ```text
-K4-L3B-NguyenVanAn-L3A202600280-AIEvaluation
+K4-L3B-DAY14-NguyenVanAn-L3A202600280-AIEvaluation
 ```
 
 > ⚠️ **Lưu ý:** Đặt sai tên repository sẽ bị trừ **5 điểm** theo quy định trong [RUBRIC.md](RUBRIC.md).
@@ -47,15 +47,27 @@ Các file sinh ra trong quá trình chạy (artifacts) là tùy chọn (optional
 
 Hãy chạy các kiểm tra sau và tích chọn đầy đủ trước khi nộp bài:
 
-- [ ] Repository đã được đặt đúng tên chuẩn: `K4-L3B-<HoVaTen>-<MSSV>-AIEvaluation`.
-- [ ] Chạy `python validate_golden_dataset.py` báo `PASS`.
-- [ ] Toàn bộ required tests pass khi chạy `pytest tests/ -v` (41 passed, 1 skipped nếu không làm bonus).
-- [ ] `golden_dataset.json` đủ 20 QA (5 Easy + 7 Medium + 5 Hard + 3 Adversarial).
-- [ ] Đã kiểm tra `artifacts/actual_answers.json` sau khi chạy RAG (`python domain_assistant.py`).
-- [ ] `exercises.md` đã hoàn thành đầy đủ: Exercise 3.2 có đủ năm metrics và ba cases thấp nhất; Exercise 3.3 có rubric 1–5 và edge cases (Exercise 3.4 & 3.5 nếu chọn làm bonus).
-- [ ] `reflection.md` có ba 5 Whys analyses, bảng failure taxonomy và improvement log / regression strategy.
-- [ ] `solution/solution.py` là bản hoàn thiện của `template.py` (học viên đã copy sau khi hoàn thành code).
-- [ ] Không commit `.env`, API key hoặc dữ liệu nhạy cảm lên GitHub.
+- [x] Repository đã được đặt đúng tên chuẩn: `K4-L3B-DAY14-<HoVaTen>-<MSSV>-AIEvaluation`.
+- [x] Chạy `python validate_golden_dataset.py` báo `PASS`.
+- [x] Toàn bộ required tests pass khi chạy `pytest tests/ -v` (42 passed, không skipped).
+- [x] `golden_dataset.json` đủ 20 QA (5 Easy + 7 Medium + 5 Hard + 3 Adversarial).
+- [x] Đã kiểm tra `artifacts/actual_answers.json` sau khi chạy RAG (`python domain_assistant.py`).
+- [x] `exercises.md` đã điền bản nháp đầy đủ: Exercise 3.2 có đủ năm metrics và ba cases thấp nhất; Exercise 3.3 có rubric 1–5 và edge cases (Exercise 3.4 & 3.5 nếu chọn làm bonus).
+- [x] `reflection.md` có bản nháp ba 5 Whys analyses, bảng failure taxonomy và improvement log / regression strategy.
+- [x] `solution/solution.py` là bản hoàn thiện của `template.py` (đã kiểm tra code thực thi đồng bộ, chỉ khác docstring hướng dẫn đầu file).
+- [x] `.env` được ignore, không nằm trong tracked files; khóa cấu hình không xuất hiện trong các file tracked và artifacts đã rà.
+
+
+**Kết quả rà CP5 tại máy:** 42 passed, không skipped; dataset PASS (20 QA, 10/10 documents); 20 actual answers khớp theo ID và năm metrics khớp phép chấm trực tiếp. Regression boundary 0,04/0,05/0,06 đã kiểm tra. Benchmark hiện tại đạt 10/20 câu; điểm benchmark không phải điểm bài lab.
+
+**Các việc còn lại trước khi nộp:**
+
+- [ ] Học viên tự đọc, chỉnh và xác nhận phần phân tích/reflection theo RULES.md mục 2.
+- Bản hoàn thiện được bàn giao qua Git commit; kiểm tra commit mới nhất trên repository trước khi dán link Codelab.
+- [x] Repository Public đã xác nhận qua GitHub API; tên remote giữ DAY14 theo xác nhận của học viên.
+- [ ] Tự nộp link repository lên Codelab.
+
+Bonus 3.4 đã thiết kế so sánh Ragas/DeepEval (không bịa scores); bonus 3.5 đã triển khai và lưu kết quả 20 cases. Bản chấm sai cũ ở `artifacts/cp4_initial_runner_bug/` chỉ giữ để đối chiếu; kết quả đúng là `artifacts/benchmark_results.json`.
 
 ---
 
@@ -64,3 +76,10 @@ Hãy chạy các kiểm tra sau và tích chọn đầy đủ trước khi nộp
 - [RUBRIC.md](RUBRIC.md) — Tiêu chí chấm điểm chi tiết và các trường hợp trừ điểm
 - [CHECKPOINTS.md](CHECKPOINTS.md) — Hướng dẫn từng checkpoint và tiêu chuẩn nghiệm thu
 - [RULES.md](RULES.md) — Quy định làm bài, sử dụng AI và bảo mật
+
+## Bằng chứng rà soát cuối
+
+- `artifacts/submission_audit.json`: 42 tests đạt, dataset PASS, 20 answers và năm metrics khớp phép tính lại, hai file code đồng bộ.
+- `artifacts/reranking_results.json`: bonus 3.5 có thứ tự chunks và điểm trước/sau cho 20 cases.
+- Repository nộp theo xác nhận của học viên: https://github.com/conanWinner/K4-L3B-DAY14-DoanQuangThang-2A202602395-AIEvaluation
+- Học viên tự xác nhận reflection và tự nộp link Codelab theo RULES.md.

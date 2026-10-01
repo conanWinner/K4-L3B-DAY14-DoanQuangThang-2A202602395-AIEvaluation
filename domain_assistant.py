@@ -250,10 +250,29 @@ class OpenAIGenerator:
             raise RuntimeError("OPENAI_API_KEY is missing from .env")
         if not self.model:
             raise RuntimeError("OPENAI_MODEL is missing from .env")
-        self.client = OpenAI(api_key=api_key)
-        self.max_output_tokens = max_output_tokens
+        self.api_style = os.getenv("OPENAI_API_STYLE", "responses").strip()
+        if self.api_style not in {"responses", "chat"}:
+            raise ValueError("OPENAI_API_STYLE must be responses or chat")
+        base_url = os.getenv("OPENAI_BASE_URL", "").strip()
+        self.client = OpenAI(api_key=api_key, base_url=base_url or None,
+                             timeout=60.0, max_retries=1)
+        self.max_output_tokens = int(os.getenv("OPENAI_MAX_OUTPUT_TOKENS",
+                                               str(max_output_tokens)))
+        if self.max_output_tokens <= 0:
+            raise ValueError("OPENAI_MAX_OUTPUT_TOKENS must be positive")
 
     def generate(self, prompt: str) -> str:
+        if self.api_style == "chat":
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0,
+                max_tokens=self.max_output_tokens,
+            )
+            answer = (response.choices[0].message.content or "").strip()
+            if not answer:
+                raise RuntimeError("Chat API returned an empty answer")
+            return answer
         response = self.client.responses.create(
             model=self.model,
             input=prompt,
